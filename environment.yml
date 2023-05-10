@@ -1,0 +1,13 @@
+name: tools
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.8
+  - matplotlib=3.5
+  - ipython=8.2
+  - ipykernel=5.5
+  - statsmodels=0.14
+  - scikit-learn=1.2
