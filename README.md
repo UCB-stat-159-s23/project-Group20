@@ -1,6 +1,6 @@
 # Stat 159 Group 20 Project: Housing Prices Prediction
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s23/project-Group20/HEAD) [TODO, binderhub busy???]
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s23/project-Group20/HEAD)
 
 ## Introduction
 This is a Final Project of Group 20 for STAT 159 Spring 2023. The project explores factors that impact the housing price, such as demographic, socioeconomic, and environmental factors. The data is obtained from a [Kaggle tutorial competition](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/data). 
