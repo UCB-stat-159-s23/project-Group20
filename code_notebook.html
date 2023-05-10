@@ -346,8 +346,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries-and-load-data">Import Libraries and Load Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-dataset-exploration">Basic Dataset Exploration</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Stat 159 Group 20 Project</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#housing-prices-prediction">Housing Prices Prediction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries-and-loading-data">Importing Libraries and Loading data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-data-exploration">Basic Data Exploration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">Data Cleaning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-sale-price-and-sale-price-statistics">Distribution of Sale Price and Sale Price Statistics</a></li>
@@ -358,6 +361,9 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-squares-ols-regression">Ordinary Least Squares (OLS) Regression</a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -370,37 +376,41 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="stat-159-group-20-project">
 <h1>Stat 159 Group 20 Project<a class="headerlink" href="#stat-159-group-20-project" title="Permalink to this heading">#</a></h1>
-<p>This is the Final Project of Group 20 for STAT 159 Spring 2023. The project explores factors that impact the housing price, such as demographic, socioeconomic, and environmental factors. The data is obtained from a <a class="reference external" href="https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/data">Kaggle tutorial competition</a>. The study starts with a introduction with a brief overview of the project’s objectives and the data sources used in the analysis. Then, we did data importation and data cleaning. We created a 70/30 training/test dataset. For exploratory data analysis (EDA), we conducted descriptive statistics and visualizations, such as bar charts, histograms, and scatter plots. With the plots from EDA, we did feature selection to select the most relevant features for modeling using correlation analysis, feature importance techniques, and domain knowledge. We also conduct a simple ordinary least squares (OLS) regression to predict the outcome of interest using a subset of features. Then, we compared model performance using evaluation metrics such as R-squared, mean squared error, and mean absolute error. We provided the necessary packages and tests for this project, as well as the datasets and plots.</p>
-<section id="import-libraries-and-load-data">
-<h2>Import Libraries and Load Data<a class="headerlink" href="#import-libraries-and-load-data" title="Permalink to this heading">#</a></h2>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="housing-prices-prediction">
+<h1>Housing Prices Prediction<a class="headerlink" href="#housing-prices-prediction" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>This project explores factors that impact the housing price, such as demographic, socioeconomic, and environmental factors. The dataset is obtained from a <a class="reference external" href="https://www.kaggle.com/code/gusthema/house-prices-prediction-using-tfdf">Kaggle tutorial competition</a>. The study starts with a introduction with a brief overview of the project’s objectives and the data sources used in the analysis. Then, we did data import and data cleaning. We created a 70/30 training/test dataset. For exploratory data analysis (EDA), we conducted descriptive statistics and visualizations, such as bar charts, histograms, and scatter plots. With the plots from EDA, we did feature selection to select the most relevant features for modeling using correlation analysis, feature importance techniques, and domain knowledge.</p>
+<p>We also conduct a simple ordinary least squares (OLS) regression to predict the outcome of interest using a subset of features. Then, we compared model performance using evaluation metrics such as R-squared, mean squared error, and mean absolute error. We provided the necessary packages and tests for this project, as well as the datasets and plots.</p>
+</section>
+<section id="importing-libraries-and-loading-data">
+<h2>Importing Libraries and Loading data<a class="headerlink" href="#importing-libraries-and-loading-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import Python libraries</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-
-<span class="c1"># import local library</span>
 <span class="kn">from</span> <span class="nn">tools</span> <span class="kn">import</span> <span class="n">utils</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>The data are split into training and test sets with 1,460 and 1,459 observations, respectively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#l load train and test data</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/train.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/train.csv&quot;</span><span class="p">)</span>
 <span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/test.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="basic-dataset-exploration">
-<h2>Basic Dataset Exploration<a class="headerlink" href="#basic-dataset-exploration" title="Permalink to this heading">#</a></h2>
+<section id="basic-data-exploration">
+<h2>Basic Data Exploration<a class="headerlink" href="#basic-data-exploration" title="Permalink to this heading">#</a></h2>
 <p>First we take a simple look at the Pandas dataframe and its features.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -588,6 +598,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>The training set consists of 81 columns, of which the last one, <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code> is the response variable.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -693,7 +704,7 @@ memory usage: 924.0+ KB
 <p>Now that we have an idea of what the data looks like, we will clean the dataset for analysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seeing how many null values are in each column</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># See how many null values are in each column</span>
 <span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -724,10 +735,9 @@ dtype: int64
 </div>
 </div>
 </div>
-<p>Removing Columns that have a lot of NaN values (since we will not be able to make good predictions with alot of missing data) and Id since it does not affect price.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop columns with &gt;60% NaNs</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop columns with &gt; 60% NaNs</span>
 <span class="n">data_cleaned</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0.6</span><span class="p">]]</span>
 <span class="n">data_cleaned</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Id&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">data_cleaned</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -735,7 +745,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1773/2395362859.py:3: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1743/648256266.py:3: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
@@ -930,15 +940,17 @@ MiscFeature ,
 </div>
 </div>
 </div>
+<p>We remove columns that have a lot of <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values since we will not be able to make good predictions with a lot of missing data. We also drop the <code class="docutils literal notranslate"><span class="pre">Id</span></code> columns since it does not affect the housing price.</p>
+<p>Now the DataFrame consists of 79 predictors and our response variable <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code>.</p>
 </section>
 <section id="exploratory-data-analysis">
 <h2>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this heading">#</a></h2>
 <section id="distribution-of-sale-price-and-sale-price-statistics">
 <h3>Distribution of Sale Price and Sale Price Statistics<a class="headerlink" href="#distribution-of-sale-price-and-sale-price-statistics" title="Permalink to this heading">#</a></h3>
+<p>We create a distribution plot of the <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code> column from <code class="docutils literal notranslate"><span class="pre">data_cleaned</span></code> to have an understanding of the overall pattern.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sale price statistics</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data_cleaned</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data_cleaned</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
 <span class="n">Data_SalePrice</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data_cleaned</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">])</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">Data_SalePrice</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/Data_SalePrice.jpg&#39;</span><span class="p">)</span>
@@ -957,7 +969,7 @@ max      755000.000000
 Name: SalePrice, dtype: float64
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1773/3582955408.py:3: UserWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1743/1936500381.py:2: UserWarning: 
 
 `distplot` is a deprecated function and will be removed in seaborn v0.14.0.
 
@@ -973,6 +985,7 @@ https://gist.github.com/mwaskom/de44147ed2974457ad6372750bbe5751
 <img alt="_images/d08d5194486542a98e1d9fc0994651414a690468b7fedb828b23a0b90ac955d1.png" src="_images/d08d5194486542a98e1d9fc0994651414a690468b7fedb828b23a0b90ac955d1.png" />
 </div>
 </div>
+<p>Based the on the plot shown above, the distribution of the <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code> column appears to be right-skewed, indicating that the majority of the sale prices are concentrated towards the lower end of the price range, with some higher-priced outliers.</p>
 </section>
 <section id="distribution-of-other-features">
 <h3>Distribution of Other Features<a class="headerlink" href="#distribution-of-other-features" title="Permalink to this heading">#</a></h3>
@@ -999,21 +1012,40 @@ https://gist.github.com/mwaskom/de44147ed2974457ad6372750bbe5751
 </section>
 <section id="feature-correlation-heatmap">
 <h3>Feature Correlation Heatmap<a class="headerlink" href="#feature-correlation-heatmap" title="Permalink to this heading">#</a></h3>
+<p>We use a heatmap to see which numeric variables have a high correlation with <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heatmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">data_cleaned_numerical</span><span class="o">.</span><span class="n">corr</span><span class="p">())</span>
-<span class="n">correlations</span> <span class="o">=</span> <span class="n">data_cleaned_numerical</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span>
-<span class="n">correlations</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">correlations</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.6</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">heatmap</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/heatmap.jpg&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the numerical variables DataFrame</span>
+<span class="n">all_numVar</span> <span class="o">=</span> <span class="n">data_cleaned_numerical</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Compute correlations of all numerical variables</span>
+<span class="n">cor_numVar</span> <span class="o">=</span> <span class="n">all_numVar</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span> 
+
+<span class="c1"># Sort on decreasing correlations with &#39;SalePrice&#39;</span>
+<span class="n">cor_sorted</span> <span class="o">=</span> <span class="n">cor_numVar</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Select only high correlations (a threshold of 0.6)</span>
+<span class="n">CorHigh</span> <span class="o">=</span> <span class="n">cor_sorted</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">cor_sorted</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.6</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+
+<span class="c1"># Subset the correlation matrix for high correlations only</span>
+<span class="n">cor_numVar</span> <span class="o">=</span> <span class="n">cor_numVar</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">CorHigh</span><span class="p">,</span> <span class="n">CorHigh</span><span class="p">]</span>
+
+<span class="c1"># Plot the correlation matrix using a heatmap</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cor_numVar</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/heatmap.jpg&#39;</span><span class="p">)</span>  <span class="c1"># Save the figure as an image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/20d2cf085aafe1cb82f60e1fabed8166d3b07cfe7e4032a6fc3d3f8db6cdf6c0.png" src="_images/20d2cf085aafe1cb82f60e1fabed8166d3b07cfe7e4032a6fc3d3f8db6cdf6c0.png" />
+<img alt="_images/e18e3402252b8706287aa68f4394978acf2acb24286ed56849bac306b70628a4.png" src="_images/e18e3402252b8706287aa68f4394978acf2acb24286ed56849bac306b70628a4.png" />
 </div>
 </div>
-<p>Not including SalePrice, there are 6 strongly correlated features with SalePrice.</p>
+<p>This heatmap shows the six variables that have a high correlation with the response variable <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code>, suggesting their potential importance in predicting house sale prices.</p>
+<p>From the plot, we can observe that some variables are highly correlated with each other. For instance, the correlation between <code class="docutils literal notranslate"><span class="pre">GarageArea</span></code> and <code class="docutils literal notranslate"><span class="pre">GarageCars</span></code> is extremely high with a correlation coefficient of 0.88. This high correlation suggests the presence of multicollinearity between these two variables.</p>
 </section>
 <section id="d-projections-of-data">
 <h3>2D Projections of Data<a class="headerlink" href="#d-projections-of-data" title="Permalink to this heading">#</a></h3>
@@ -1114,17 +1146,16 @@ https://gist.github.com/mwaskom/de44147ed2974457ad6372750bbe5751
 <p>We create a simple OLS regression model to predict the sale price of a given home.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train test split</span>
-
-<span class="n">training_data</span><span class="p">,</span> <span class="n">testing_data</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data_cleaned_numerical</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">training_data</span><span class="p">,</span> <span class="n">testing_data</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data_cleaned_numerical</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span> <span class="s1">&#39;SalePrice ~ OverallQual + GrLivArea + GarageCars + </span><span class="se">\</span>
-<span class="s1">            GarageArea + TotalBsmtSF + Q(&quot;1stFlrSF&quot;)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">training_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;SalePrice ~ OverallQual + GrLivArea + GarageCars + </span><span class="se">\</span>
+<span class="s1">                        GarageArea + TotalBsmtSF + Q(&quot;1stFlrSF&quot;)&#39;</span><span class="p">,</span> 
+              <span class="n">data</span> <span class="o">=</span> <span class="n">training_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ols</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -1136,7 +1167,7 @@ Dep. Variable:              SalePrice   R-squared:                       0.788
 Model:                            OLS   Adj. R-squared:                  0.786
 Method:                 Least Squares   F-statistic:                     597.3
 Date:                Wed, 10 May 2023   Prob (F-statistic):          6.11e-321
-Time:                        10:15:19   Log-Likelihood:                -11599.
+Time:                        10:27:14   Log-Likelihood:                -11599.
 No. Observations:                 973   AIC:                         2.321e+04
 Df Residuals:                     966   BIC:                         2.325e+04
 Df Model:                           6                                         
@@ -1168,9 +1199,7 @@ strong multicollinearity or other numerical problems.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># split features from objective</span>
-
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">training_data</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">training_data</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">training_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">testing_data</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">testing_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1180,9 +1209,7 @@ strong multicollinearity or other numerical problems.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate error statistics</span>
-
-<span class="n">ols_osr2</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">OSR2</span><span class="p">(</span><span class="n">ols</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols_osr2</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">OSR2</span><span class="p">(</span><span class="n">ols</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">ols_mae</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">ols</span><span class="p">,</span>  <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;OLS OSR2: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ols_osr2</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;OLS MAE: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ols_mae</span><span class="p">))</span>
@@ -1196,6 +1223,8 @@ OLS MAE: 25351.73544647477
 </div>
 </div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">OLS</span> <span class="pre">OSR2</span></code> value of approximately 0.694 indicates that the OLS regression model explains approximately 69.4% of the variation in the sale prices of homes in the testing set. In other words, the selected independent variables (<code class="docutils literal notranslate"><span class="pre">OverallQual</span></code>, <code class="docutils literal notranslate"><span class="pre">GrLivArea</span></code>, <code class="docutils literal notranslate"><span class="pre">GarageCars</span></code>, <code class="docutils literal notranslate"><span class="pre">GarageArea</span></code>, <code class="docutils literal notranslate"><span class="pre">TotalBsmtSF</span></code>, <code class="docutils literal notranslate"><span class="pre">1stFlrSF</span></code>) collectively contribute to explaining about 69.4% of the variability in the sale prices.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">OLS</span> <span class="pre">MAE</span></code> value of approximately 25351.735 represents the average absolute difference between the predicted sale prices and the actual sale prices in the testing set. This indicates that, on average, the OLS regression model’s predictions deviate from the actual sale prices by approximately $25,351.735.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -1294,10 +1323,10 @@ memory usage: 912.0+ KB
 </div>
 </div>
 </div>
+<p>We generate predicted sale prices using the trained OLS regression model and visualize their distribution for further analysis and comparison.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot results</span>
-<span class="n">predicting_price</span> <span class="o">=</span> <span class="n">ols</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predicting_price</span> <span class="o">=</span> <span class="n">ols</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
 <span class="n">predicting_price</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 <span class="n">Predicted_SalePrice</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">predicting_price</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">Predicted_SalePrice</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
@@ -1306,7 +1335,7 @@ memory usage: 912.0+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1773/3527105323.py:4: UserWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1743/4226525932.py:3: UserWarning: 
 
 `distplot` is a deprecated function and will be removed in seaborn v0.14.0.
 
@@ -1374,8 +1403,11 @@ https://gist.github.com/mwaskom/de44147ed2974457ad6372750bbe5751
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries-and-load-data">Import Libraries and Load Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-dataset-exploration">Basic Dataset Exploration</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Stat 159 Group 20 Project</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#housing-prices-prediction">Housing Prices Prediction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries-and-loading-data">Importing Libraries and Loading data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-data-exploration">Basic Data Exploration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">Data Cleaning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-sale-price-and-sale-price-statistics">Distribution of Sale Price and Sale Price Statistics</a></li>
@@ -1386,6 +1418,9 @@ https://gist.github.com/mwaskom/de44147ed2974457ad6372750bbe5751
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-squares-ols-regression">Ordinary Least Squares (OLS) Regression</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
