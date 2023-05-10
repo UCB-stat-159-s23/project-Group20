@@ -15,9 +15,11 @@ We also conduct a simple ordinary least squares (OLS) regression to predict the 
 ## Installation
 Start by tying the following commands in your terminal:
 - Create environment
-  - To create a new conda environment based on the specifications defined in the `environment.yml` file: `mamba env create -f environment.yml -p ~/envs/housingtools`
-  - To install a new IPython kernel into the Jupyter Notebook, specifically for the `housingtools` environment: `python -m ipykernel install --user --name housingtools --display-name "IPython - housingtools"`
-   - To use `Makefile`: `make env`
+  - To create a new conda environment based on the specifications defined in the `environment.yml` file: \
+    `mamba env create -f environment.yml -p ~/envs/housingtools`
+  - To install a new IPython kernel into the Jupyter Notebook, specifically for the `housingtools` environment: \
+    `python -m ipykernel install --user --name housingtools --display-name "IPython - housingtools"`
+  - To use `Makefile`: `make env`
 - Activate environment
   - `conda activate housingtools`
 - Install package
