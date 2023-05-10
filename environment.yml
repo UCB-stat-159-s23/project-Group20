@@ -12,3 +12,5 @@ dependencies:
   - statsmodels=0.14
   - scikit-learn=1.2
   - jupyter-book
+  - pandas
+  - seaborn

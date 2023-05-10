@@ -1,0 +1,6 @@
+jupyter-book
+matplotlib
+statsmodels
+scikit-learn
+pandas
+seaborn
