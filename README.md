@@ -8,9 +8,9 @@ This is a Final Project of Group 20 for STAT 159 Spring 2023. The project explor
 A JupyterBook of the main notebook `code_notebook.ipynb` can be found [here](https://ucb-stat-159-s23.github.io/project-Group20/).
 
 ## Project Description
-The study starts with a introduction with a brief overview of the project's objectives and the data sources used in the analysis. Then, we did data importation and data cleaning. We created a 70/30 training/test dataset. For exploratory data analysis (EDA), we conducted descriptive statistics and visualizations, such as bar charts, histograms, and scatter plots. With the plots from EDA, we did feature selection to select the most relevant features for modeling using correlation analysis, feature importance techniques, and domain knowledge. 
+The study starts with a introduction with a brief overview of the project's objectives and the data sources used in the analysis. Then, we import and clean data and create a 70/30 training/test dataset. For exploratory data analysis (EDA), we conduct descriptive statistics and visualizations, such as bar charts, histograms, and scatter plots. With the plots from EDA, we implement feature selection to select the most relevant features for modeling using correlation analysis, feature importance techniques, and domain knowledge. 
 
-We also conduct a simple ordinary least squares (OLS) regression to predict the outcome of interest using a subset of features. Then, we compared model performance using evaluation metrics such as R-squared, mean squared error, and mean absolute error. We provided the necessary packages and tests for this project, as well as the datasets and plots.
+We also perform a simple ordinary least squares (OLS) regression to predict the outcome of interest using a subset of features. Then, we compare model performance using evaluation metrics such as R-squared, mean squared error, and mean absolute error. We provide the necessary packages and tests for this project.
 
 ## Installation
 Start by tying the following commands in your terminal:
