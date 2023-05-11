@@ -31,5 +31,3 @@ Start by tying the following commands in your terminal:
 - To run all tests on the functions: `pytest housingtools`
 
 
-
-
