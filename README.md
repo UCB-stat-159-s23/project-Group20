@@ -22,7 +22,7 @@ Start by tying the following commands in your terminal:
 	  - To install a new IPython kernel into the Jupyter Notebook, specifically for the `housing` environment: \
 		`python -m ipykernel install --user --name housingtools --display-name "IPython - housing"`
 	  - Activate environment
-		  `conda activate housing`
+		`conda activate housing`
 - Install package
   - `pip install .`
 - Build target specified in `Makefile`
