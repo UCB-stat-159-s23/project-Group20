@@ -20,7 +20,7 @@ Start by tying the following commands in your terminal:
 	  - To create a new conda environment based on the specifications defined in the `environment.yml` file: \
 		`mamba env create -f environment.yml -p ~/envs/housing`
 	  - To install a new IPython kernel into the Jupyter Notebook, specifically for the `housing` environment: \
-		`python -m ipykernel install --user --name housingtools --display-name "IPython - housing"`
+		`python -m ipykernel install --user --name housing --display-name "IPython - housing"`
 	  - Activate environment \
 		`conda activate housing`
 - Install package
